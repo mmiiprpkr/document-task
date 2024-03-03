@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { format } from "date-fns";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { LucidePencil, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
+import { LucidePencil, MoreHorizontal, Trash2 } from "lucide-react";
 import { UseFileEditModal } from "@/hooks/useFileEdit";
 import { useRouter as UseRouter } from "next/navigation";
 

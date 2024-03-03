@@ -5,7 +5,7 @@ import { File } from "@/types";
 import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 
-import { Payment, columns } from "@/components/team/columns"
+import { columns } from "@/components/team/columns"
 import { DataTable } from "@/components/team/data-table";
 
 const TeamIdPage = () => {
