@@ -54,6 +54,10 @@ import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
 export const EDITOR_JS_TOOLS = {
   textVariant: TextVariantTune,
   code: CodeTool,
+  Marker: {
+    class: Marker,
+    shortcut: 'CMD+SHIFT+M',
+  },
   title: {
     class: Title
   },

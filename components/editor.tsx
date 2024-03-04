@@ -1,12 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import EditorJS from '@editorjs/editorjs';
-//@ts-ignore
-
-import Tooltip from 'editorjs-tooltip';
-import { useMutation, useQuery } from 'convex/react';
+// import Tooltip from 'editorjs-tooltip';
+import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useParams } from 'next/navigation';
 import { Id } from '@/convex/_generated/dataModel';
@@ -22,12 +20,6 @@ export const Editor = ({files, readonly = false}: EditorProps) => {
   const ref = useRef<EditorJS>();
   const params = useParams();
   const file: File | any = useMutation(api.file.upDateFile);
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const initEditor = useCallback(() => {
     const editor = new EditorJS({
@@ -58,10 +50,6 @@ export const Editor = ({files, readonly = false}: EditorProps) => {
   useEffect(() => {
     initEditor();
   }, []);
-  
-  // if (!isClient) {
-  //   return null;
-  // }
 
   return (
     <>
