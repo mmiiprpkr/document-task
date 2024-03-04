@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EditorJS from '@editorjs/editorjs';
 //@ts-ignore
@@ -23,12 +23,22 @@ export const Editor = ({files, readonly = false}: EditorProps) => {
   const params = useParams();
   const file: File | any = useMutation(api.file.upDateFile);
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const initEditor = useCallback(() => {
     const editor = new EditorJS({
+      onReady() {
+        ref.current = editor
+      },
       readOnly: readonly,
       data: files?.content ? JSON.parse(files.content) : undefined,
       autofocus: true,
       holder: "editorjs",
+      //@ts-ignore
       tools: EDITOR_JS_TOOLS,
       onChange: (event) => {
         editor.save().then((output: any) => {
@@ -42,12 +52,16 @@ export const Editor = ({files, readonly = false}: EditorProps) => {
         })
       }
     })
-    ref.current = editor
   }, [files?.content, file, params, files?.fileName, readonly])
 
+  
   useEffect(() => {
     initEditor();
   }, []);
+  
+  // if (!isClient) {
+  //   return null;
+  // }
 
   return (
     <>

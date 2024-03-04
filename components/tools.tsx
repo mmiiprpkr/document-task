@@ -43,43 +43,12 @@ import CodeTool from '@editorjs/code';
 import Table from '@editorjs/table'
 //@ts-ignore
 import LinkTool from '@editorjs/link';
-
-const uploadImageByUrl = (e: any) => {
-  let link = new Promise((resolve, reject) => {
-      try {
-          resolve(e);
-      } catch (error) {
-          reject(error);
-      }
-  });
-
-  return link.then(url => {
-      return {
-          success : 1,
-          file : { url }
-      }
-  })
-};
 //@ts-ignore
+import IndentTune from 'editorjs-indent-tune'
+import { uploadByFile } from "@/lib/uploadImagebyFiles";
+import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
 
-const uploadLink = (e) => {
-  let link = new Promise((resolve, reject) => {
-      try {
-          console.log(e);
-          resolve(e);
-      } catch (error) {
-          console.log(e);
-          reject(error);
-      }
-  });
 
-  return link.then(url => {
-      return {
-          success : 1,
-          link : { url }
-      }
-  })
-};
 
 
 export const EDITOR_JS_TOOLS = {
@@ -88,6 +57,7 @@ export const EDITOR_JS_TOOLS = {
   title: {
     class: Title
   },
+  indentTune: IndentTune,
   textAlignment: {
     class: AlignmentBlockTune,
     config: {
@@ -100,13 +70,13 @@ export const EDITOR_JS_TOOLS = {
   paragraph: {
     class: Paragraph,
     inlineToolbar: true,
-    tunes: ["textAlignment", "textVariant"]
+    tunes: ["textAlignment", "textVariant", "indentTune"]
   },
   delimiter: Delimiter,
   header: {
     class: Header,
     inlineToolbar: true,
-    tunes: ["textAlignment"],
+    tunes: ["textAlignment", "indentTune"],
     config: {
       placeholder: "Enter a header",
       levels: [1,2,3,4,5],
@@ -131,19 +101,22 @@ export const EDITOR_JS_TOOLS = {
   list: {
     class: NestedList || List,
     inlineToolbar: true,
+    tunes: ["textAlignment"],
     config: {
       defaultStyle: 'unordered'
     },
   },
   checklist: {
-    class: Checklist
+    class: Checklist,
+    tunes: ["textAlignment", "textVariant", "indentTune"],
   },
   image: {
     class: ImageTool,
     inlineToolbar: true,
     config: {
       uploader: {
-        uploadByUrl: uploadImageByUrl
+        uploadByUrl: uploadImageByUrl,
+        uploadByFile: uploadByFile
       },
     }
   },
@@ -187,9 +160,8 @@ export const EDITOR_JS_TOOLS = {
   linkTool: {
     class: LinkTool,
     config: {
-      
-      // endpoint: uploadLink// Your backend endpoint for url data fetching,
-    }
+      endpoint: '/api/link',
+    },
   },
   warning: Warning,
 }
