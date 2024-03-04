@@ -8,7 +8,7 @@ const { getUser } = getKindeServerSession()
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
-  imageUploader: f({ image: { maxFileSize: '4MB' } })
+  imageUploader: f({ image: { maxFileSize: '4MB' }, pdf: { maxFileCount: 1 }, video: { maxFileCount: 1, maxFileSize: "1GB" }, audio: {maxFileCount: 1 }})
     // .middleware(async (req) => {
     //   const user = await getUser()
 
