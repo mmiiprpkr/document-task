@@ -39,6 +39,7 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "@rxpm/editor-js-code": "^0.0.1",
     "@sotaproject/strikethrough": "^1.0.1",
     "@tanstack/react-table": "^8.13.2",
     "@uploadthing/react": "^6.3.2",

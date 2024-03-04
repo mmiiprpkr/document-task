@@ -44,6 +44,8 @@ import Table from '@editorjs/table'
 //@ts-ignore
 import LinkTool from '@editorjs/link';
 //@ts-ignore
+import CodeTool from '@rxpm/editor-js-code';
+//@ts-ignore
 import IndentTune from 'editorjs-indent-tune'
 import { uploadByFile } from "@/lib/uploadImagebyFiles";
 import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
@@ -53,7 +55,20 @@ import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
 
 export const EDITOR_JS_TOOLS = {
   textVariant: TextVariantTune,
-  code: CodeTool,
+  code: {
+    class: CodeTool,
+    config: {
+      modes: {
+        'js': 'JavaScript',
+        'py': 'Python',
+        'go': 'Go',
+        'cpp': 'C++',
+        'cs': 'C#',
+        'md': 'Markdown',
+      },
+      defaultMode: 'go'
+    }
+  },
   Marker: {
     class: Marker,
     shortcut: 'CMD+SHIFT+M',
