@@ -21,7 +21,7 @@ import Marker from '@editorjs/marker';
 //@ts-ignore
 import InlineCode from '@editorjs/inline-code';
 //@ts-ignore
-import ColorPlugin from "editorjs-text-color-plugin"
+// import ColorPlugin from "editorjs-text-color-plugin"
 //@ts-ignore
 import AlignmentBlockTune from "editorjs-text-alignment-blocktune"
 //@ts-ignore
@@ -46,6 +46,7 @@ import LinkTool from '@editorjs/link';
 //@ts-ignore
 import CodeTool from '@rxpm/editor-js-code';
 //@ts-ignore
+const ColorPlugin = require('@medistream/editorjs-text-color-plugin');
 import IndentTune from 'editorjs-indent-tune'
 import { uploadByFile } from "@/lib/uploadImagebyFiles";
 import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
@@ -168,12 +169,12 @@ export const EDITOR_JS_TOOLS = {
   changeCase: {
     class: ChangeCase
   },
-  color: {
+  Color: {
     class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
     config: {
        colorCollections: ['#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39', '#FFF'],
        defaultColor: '#FF1300',
-       customPicker: true
+       type: 'text', 
     }     
   },
   linkTool: {

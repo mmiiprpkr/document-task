@@ -72,6 +72,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@medistream/editorjs-text-color-plugin": "^1.14.2",
     "@types/editorjs__header": "^2.6.3",
     "@types/node": "^20",
     "@types/react": "^18",
