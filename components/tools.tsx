@@ -38,7 +38,7 @@ import Delimiter from '@editorjs/delimiter';
 //@ts-ignore
 import Warning from '@editorjs/warning';
 //@ts-ignore
-import CodeTool from '@editorjs/code';
+// import CodeTool from '@editorjs/code';
 //@ts-ignore
 import Table from '@editorjs/table'
 //@ts-ignore
