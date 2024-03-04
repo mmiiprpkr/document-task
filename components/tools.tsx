@@ -47,6 +47,9 @@ import LinkTool from '@editorjs/link';
 import CodeTool from '@rxpm/editor-js-code';
 //@ts-ignore
 const ColorPlugin = require('@medistream/editorjs-text-color-plugin');
+//@ts-ignore
+import Quote from "@juratbek/editorjs-quote";
+
 import IndentTune from 'editorjs-indent-tune'
 import { uploadByFile } from "@/lib/uploadImagebyFiles";
 import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
@@ -57,6 +60,15 @@ import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
 export const EDITOR_JS_TOOLS = {
   textVariant: TextVariantTune,
   code: {
+    quote: {
+      class: Quote,
+      inlineToolbar: true,
+      shortcut: 'CMD+SHIFT+O',
+      config: {
+        quotePlaceholder: 'Enter a quote',
+        captionPlaceholder: 'Quote\'s author',
+      },
+    },
     class: CodeTool,
     config: {
       modes: {
