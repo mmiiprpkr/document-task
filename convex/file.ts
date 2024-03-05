@@ -36,6 +36,11 @@ export const getFileById = query({
   },
   handler: async (ctx, args) => {
     const file = ctx.db.get(args._id)
+
+    if (!file) {
+      return null
+    }
+    
     return file;
   }
 });

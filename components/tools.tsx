@@ -60,8 +60,15 @@ import editorjsCodeflask from "@calumk/editorjs-codeflask";
 import AttachesTool from "@editorjs/attaches";
 //@ts-ignore
 import RawTool from "@editorjs/raw";
+//@ts-ignore
+import ToggleBlock from 'editorjs-toggle-block';
+
 
 export const EDITOR_JS_TOOLS = {
+  toggle: {
+    class: ToggleBlock,
+    inlineToolbar: true,
+  },
   header: {
     class: Header,
     inlineToolbar: true,
