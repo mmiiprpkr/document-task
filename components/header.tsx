@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 export const Header = () => {
   const { user }: KindeState | undefined  = useKindeBrowserClient();
 
-  if (!user) {
+  if (user === undefined) {
     return null
   }
 
