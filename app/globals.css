@@ -27,20 +27,6 @@ h6.ce-header{
   @apply text-sm font-semibold
 }
 
-.ce-warning {
-  background-color: #ffe8e8;
-  border: 1px solid #ff6666;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
-}
-
-/* Style the text inside the warning block */
-.ce-warning p {
-  color: #ff3333;
-  font-weight: bold;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;

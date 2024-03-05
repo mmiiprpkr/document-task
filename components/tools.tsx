@@ -1,5 +1,9 @@
 const Header = require("editorjs-header-with-anchor");
-// import Header from '@editorjs/header';
+const Paragraph = require("editorjs-paragraph-with-alignment");
+const TextColor = require("@itech-indrustries/editor-js-text-color");
+const ImageGallery = require("@rodrigoodhin/editorjs-image-gallery");
+const MermaidTool = require('editorjs-mermaid');
+
 //@ts-ignore
 import Alert from "editorjs-alert";
 //@ts-ignore
@@ -15,23 +19,16 @@ import Strikethrough from "@sotaproject/strikethrough";
 //@ts-ignore
 import Checklist from "@editorjs/checklist";
 //@ts-ignore
-import SimpleImage from "@editorjs/simple-image";
-//@ts-ignore
 import Marker from "@editorjs/marker";
 //@ts-ignore
 import InlineCode from "@editorjs/inline-code";
 //@ts-ignore
-import ColorTool from "editorjs-inline-color";
-//@ts-ignore
-const ColorPlugin = require("editorjs-text-color-plugin");
-const TextColor = require("@itech-indrustries/editor-js-text-color");
 //@ts-ignore
 import AlignmentBlockTune from "editorjs-text-alignment-blocktune";
 //@ts-ignore
 import TextVariantTune from "@editorjs/text-variant-tune";
 import Title from "title-editorjs";
 //@ts-ignore
-const Paragraph = require("editorjs-paragraph-with-alignment");
 //@ts-ignore
 import ImageTool from "@editorjs/image";
 //@ts-ignore
@@ -41,30 +38,45 @@ import Delimiter from "@editorjs/delimiter";
 //@ts-ignore
 import Warning from "@editorjs/warning";
 //@ts-ignore
-// import CodeTool from '@editorjs/code';
-//@ts-ignore
 import Table from "@editorjs/table";
 //@ts-ignore
 import LinkTool from "@editorjs/link";
 //@ts-ignore
-import CodeTool from "@rxpm/editor-js-code";
+import Quote from "editorjs-quoted";
 //@ts-ignore
-import Quote from "@juratbek/editorjs-quote";
 import IndentTune from "editorjs-indent-tune";
-import { uploadByFile } from "@/lib/uploadImagebyFiles";
-import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
-const ImageGallery = require("@rodrigoodhin/editorjs-image-gallery");
 //@ts-ignore
-import editorjsCodeflask from "@calumk/editorjs-codeflask";
+import editorjsCodeflask from "@7polo/editorjs-code2";
 //@ts-ignore
 import AttachesTool from "@editorjs/attaches";
 //@ts-ignore
 import RawTool from "@editorjs/raw";
 //@ts-ignore
-import ToggleBlock from 'editorjs-toggle-block';
 
+import ToggleBlock from 'editorjs-toggle-block';
+import Annotation from "@/lib/annotion";
+import NoticeTune from "@/lib/notic";
+import Tooltip from "@/lib/tooptip"
+
+import { uploadByFile } from "@/lib/uploadImagebyFiles";
+import { uploadImageByUrl } from "@/lib/uploadImagebyUrl";
 
 export const EDITOR_JS_TOOLS = {
+  // anchorTune: AnchorTune,
+  tooltip: {
+    class: Tooltip,
+    config: {
+      location: 'left',
+      underline: true,
+      placeholder: 'Enter a tooltip',
+      highlightColor: '#FFEFD5',
+      backgroundColor: '#154360',
+      textColor: '#FDFEFE',
+      holder: 'editorId',
+    }
+  },
+  noticeTune: NoticeTune,
+  annotation: Annotation,
   toggle: {
     class: ToggleBlock,
     inlineToolbar: true,
@@ -72,7 +84,7 @@ export const EDITOR_JS_TOOLS = {
   header: {
     class: Header,
     inlineToolbar: true,
-    tunes: ["textAlignment", "indentTune"],
+    tunes: ["textAlignment", "noticeTune"],
     config: {
       placeholder: "Enter a header",
       levels: [1, 2, 3, 4, 5],
@@ -82,24 +94,22 @@ export const EDITOR_JS_TOOLS = {
   paragraph: {
     class: Paragraph,
     inlineToolbar: true,
-    tunes: ["textAlignment", "textVariant", "indentTune"],
+    tunes: ["textVariant", "indentTune"],
   },
   title: {
     class: Title,
   },
-  quote: {
-    class: Quote,
-    inlineToolbar: true,
-    shortcut: "CMD+SHIFT+O",
-    tunes: ["textAlignment", "indentTune"],
-    config: {
-      quotePlaceholder: "Enter a quote",
-      captionPlaceholder: "Quote's author",
+    quoted: {
+      class: Quote,
+      tunes: ["textVariant", "indentTune"],
+      config:{
+        placeholder:"Type something",
+        defaultType:"info",
+      }
     },
-  },
   code: editorjsCodeflask,
   list: {
-    class: NestedList || List,
+    class: NestedList, List,
     inlineToolbar: true,
     tunes: ["textAlignment"],
     config: {
@@ -141,6 +151,7 @@ export const EDITOR_JS_TOOLS = {
       },
     },
   },
+  mermaid: MermaidTool,
   raw: RawTool,
   attaches: {
     class: AttachesTool,
@@ -155,7 +166,6 @@ export const EDITOR_JS_TOOLS = {
   imageGallery: ImageGallery,
   textVariant: TextVariantTune,
   ColorPicker: TextColor,
-
   indentTune: IndentTune,
   textAlignment: {
     class: AlignmentBlockTune,
@@ -191,14 +201,6 @@ export const EDITOR_JS_TOOLS = {
     class: Marker,
     shortcut: "CMD+SHIFT+M",
   },
-  // Color: {
-  //   class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
-  //   config: {
-  //      colorCollections: ['#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39', '#FFF'],
-  //      defaultColor: '#00BCD4',
-  //      type: 'text',
-  //   }
-  // },
   inlineCode: {
     class: InlineCode,
   },
