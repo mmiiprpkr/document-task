@@ -14,12 +14,7 @@ const TeamIdPage = () => {
   const team = useQuery(api.team.getTeamById, { _id: params?.teamId as string });
   const files = useQuery<File[] | any>(api.file.getFiles, {teamId: params?.teamId as string });
 
-  if (team === undefined) {
-    return null;
-  }
-
-
-  if (files === undefined) {
+  if (team === undefined || files === undefined) {
     return null;
   }
 

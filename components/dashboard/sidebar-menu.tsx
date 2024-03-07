@@ -60,7 +60,8 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
     deleteTeam({
       _id: params?.teamId as Id<"teams">
     })
-    handleClose();
+      handleClose();
+      return router.push("/dashboard")
   }
 
   const handleChangeTeam = (team: Team) => {

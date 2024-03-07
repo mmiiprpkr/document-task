@@ -1,10 +1,5 @@
 "use client";
 
-import { Empty } from "@/components/empty";
-import { Button } from "@/components/ui/button";
-import { WorkSpaceHeader } from "@/components/workspace/workspace-header";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
 import { Editor } from "@/components/editor";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
