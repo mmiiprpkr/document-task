@@ -28,6 +28,7 @@ import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
 import { UseFileEditModal } from "@/hooks/useFileEdit";
 import { ConfirmModal } from "../modals/confirm-modal";
 import Image from "next/image";
+import { UseAddFileModal } from "@/hooks/useAddfileModal";
 
 interface SwitchFileProps {
   files: File[] | undefined;
@@ -39,7 +40,8 @@ export const SwitchFile = ({ files, user }: SwitchFileProps) => {
   const params = useParams();
   const router = useRouter();
   const currentFile: File | null = useQuery(api.file.getFileById, { _id: params?.fileId as Id<"files"> })
-  const { onOpen } = UseFileEditModal();
+  const { onOpen: onOpenEditModal } = UseFileEditModal();
+  const { onOpen: onOpenFileModal } = UseAddFileModal();
   const deleteFile = useMutation(api.file.deleteFile);
 
   const handleDelete = () => {
@@ -65,7 +67,7 @@ export const SwitchFile = ({ files, user }: SwitchFileProps) => {
         <Command>
           <CommandInput placeholder="Search files..." />
           <CommandEmpty>No files found.</CommandEmpty>
-          <CommandGroup className="flex flex-col space-y-1 p-0">
+          <CommandGroup className="flex flex-col p-0">
             {files?.map((file) => (
               <CommandItem
                 key={file._id}
@@ -89,27 +91,32 @@ export const SwitchFile = ({ files, user }: SwitchFileProps) => {
               </CommandItem>
             ))}
             <CommandItem>
-              <SidebarBottom user={user}/>
+              <button
+                className="flex items-center justify-start w-full"
+                onClick={() => onOpenFileModal(user)}
+              >
+                <PlusCircle className="h-4 w-4 mr-2"/>
+                  Add
+                </button>
+              {/* <SidebarBottom user={user}/> */}
             </CommandItem>
             <CommandItem>
-              <Button
-                size="sm"
-                className="flex items-center justify-center w-full"
-                onClick={() => onOpen(currentFile!)}
+              <button
+                className="flex items-center justify-start w-full"
+                onClick={() => onOpenEditModal(currentFile!)}
               >
                 <Pencil className="h-4 w-4 mr-2"/>
-                Edit
-              </Button>
+                  Edit
+              </button>
             </CommandItem>
             <CommandItem>
               <ConfirmModal confirmFn={handleDelete} header="Are you absolutely sure?" discription="This action cannot be undone. permanently delete your file and remove your data from our servers.">
-                <Button
-                  size="sm"
-                  className="flex items-center justify-center w-full"
+                <button
+                  className="flex items-center justify-start w-full"
                 >
                   <Trash2 className="h-4 w-4 mr-2"/>
                   Delete
-                </Button>
+                </button>
               </ConfirmModal>
             </CommandItem>
           </CommandGroup>

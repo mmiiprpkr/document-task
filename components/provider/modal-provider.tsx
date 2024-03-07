@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { SettingsModal } from "@/components/modals/setting-modal";
 import { FileEditModal } from "@/components/modals/edit-file-modal";
+import { AddFileModal } from "@/components/modals/add-file-modal";
 
 export const ModalProvider = () => {
   const [isClient, setIsClient] = useState(false);
@@ -20,6 +21,7 @@ export const ModalProvider = () => {
     <>
       <SettingsModal />
       <FileEditModal />
+      <AddFileModal />
     </>
   )
 }
