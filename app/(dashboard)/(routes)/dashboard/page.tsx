@@ -37,13 +37,13 @@ const Dashboardpage = () => {
     })
   }
 
-  console.log(team);
+  if (team[0]?._id) { 
+    return router.push(`/dashboard/${team[0]._id}`)
+  };
   
   if (!team[0]?._id) {
     return router.push("/teams/create");
   }
-
-  return router.push(`/dashboard/${team[0]._id}`);
 };
 
 export default Dashboardpage;
