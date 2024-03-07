@@ -40,3 +40,16 @@ export const upDateTeam = mutation({
     return team;
   }
 })
+
+export const deleteTeam = mutation({
+  args: { _id: v.id("teams") },
+  handler: async (ctx, args) => {
+    if (!args._id) {
+      throw new Error("Team id missing");
+    };
+
+    const team = await ctx.db.delete(args._id)
+
+    return team
+  }
+})

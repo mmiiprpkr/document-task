@@ -18,7 +18,7 @@ export const createFile = mutation({
 
 export const getFiles=query({
   args:{
-      teamId:v.string()
+    teamId:v.optional(v.id("teams"))
   },
   handler:async(ctx, args)=> {
       const result=ctx.db.query('files')
@@ -53,6 +53,19 @@ export const upDateFile = mutation({
     const file = await ctx.db.patch(args._id, {
       ...rest
     });
+    return file;
+  }
+})
+
+export const deleteFile = mutation({
+  args: { _id: v.id("files") },
+  handler: async (ctx, args) => {
+    if (!args._id) {
+      throw new Error("Files id missing");
+    };
+
+    const file = await ctx.db.delete(args._id)
+
     return file;
   }
 })

@@ -22,6 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
+import Image from "next/image";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -98,10 +99,18 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-50 w-full flex flex-col justify-center items-center space-y-2"
                 >
-                  No results.
+                  <Image 
+                    src="/result.png"
+                    alt="no result"
+                    width={200}
+                    height={200}
+                  />
                 </TableCell>
+                <h2 className="text-black font-bold flex justify-center">
+                  No result
+                </h2>
               </TableRow>
             )}
           </TableBody>

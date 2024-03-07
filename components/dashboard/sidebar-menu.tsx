@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, LayoutGrid, LogOut, Settings, User } from "lucide-react";
+import { ChevronDown, LayoutGrid, LogOut, Settings, Trash2, User } from "lucide-react";
 import Image from "next/image";
 
 import {
@@ -12,7 +12,7 @@ import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
 import { Separator } from "@/components/ui/separator";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
 import { UserAvatar } from "@/components/avatar";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useState } from "react";
 import { Team } from "@/types";
@@ -20,6 +20,8 @@ import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { SidebarItem } from "./sidebar-item";
 import { UseSettingModal } from "@/hooks/useSettingModal";
+import { ConfirmModal } from "../modals/confirm-modal";
+import { Id } from "@/convex/_generated/dataModel";
 
 const menu = [
   {
@@ -42,6 +44,7 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
   const { onOpen } = UseSettingModal();
 
   const team: Team[] | any = useQuery(api.team.getTeamById, { _id: params?.teamId as string });
+  const deleteTeam = useMutation(api.team.deleteTeam);
 
   if (team === undefined) {
     return null;
@@ -52,6 +55,14 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
       router.push(item);
     }
   );
+
+  const onDelete = () => {
+    deleteTeam({
+      _id: params?.teamId as Id<"teams">
+    })
+    handleClose();
+    router.push("/dashboard");
+  }
 
   const handleChangeTeam = (team: Team) => {
     router.push(`/dashboard/${team._id}`);
@@ -77,7 +88,7 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
       <Popover open={open} onOpenChange={handleClose}>
         <PopoverTrigger className="w-full" asChild>
           <div className="flex items-center gap-3 rounded-md hover:bg-gray-200 p-2 cursor-pointer" onClick={handleOpen}>
-            <Image src="/logo-1.png" alt="logo" width={40} height={40} />
+            <Image src="/logo.png" alt="logo" width={40} height={40} />
             <h2 className="font-black flex items-center gap-2 w-full text-primary">
               {team[0]?.teamName}
               <ChevronDown className="w-4 h-4 ml-auto" />
@@ -115,6 +126,16 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
                 <Settings className="h-4 w-4" />
                 Settings
               </Button>
+              <ConfirmModal confirmFn={onDelete} header="Are you absolutely sure?" discription="This action cannot be undone. This will permanently delete your
+            team and remove your data from our servers.">
+                <Button
+                  variant="ghost"
+                  className="flex gap-2 items-center w-full justify-start"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Delete team
+                </Button>
+              </ConfirmModal>
             <LogoutLink>
               <Button
                 variant="ghost"

@@ -54,14 +54,16 @@ const CreateTeamPage = () => {
 
   return ( 
     <div className="p-16">
-      <Image 
-        src="/logo-black.png"
-        alt="logo"
-        width={200}
-        height={200}
-      />
+      <div className="flex items-center justify-center">
+        <Image 
+          src="/logo.png"
+          alt="logo"
+          width={100}
+          height={100}
+        />
+      </div>
       <div className="flex flex-col items-center mt-8">
-        <h2 className="text-primary font-bold text-5xl">
+        <h2 className="text-primary font-bold text-2xl md:text-5xl">
           What should we call your team?
         </h2>
         <p className="text-base text-muted-foreground">

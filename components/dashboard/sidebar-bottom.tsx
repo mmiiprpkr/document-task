@@ -19,6 +19,7 @@ import { api } from "@/convex/_generated/api";
 import { useParams, useRouter } from "next/navigation";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
 import { toast } from "sonner";
+import { PlusCircle } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -89,8 +90,9 @@ export const SidebarBottom = ({
         <Button
           className="w-full"
           onClick={onOpen}
+          size="icon"
         >
-          New File
+          <PlusCircle className="h-4 w-4 mr-2"/> Add
         </Button>
       </DialogTrigger>
       <DialogContent>

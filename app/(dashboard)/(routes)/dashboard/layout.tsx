@@ -6,7 +6,7 @@ import { api } from "@/convex/_generated/api";
 import { ConvexReactClient, useConvex, useMutation } from "convex/react";
 
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { KindeState } from "@kinde-oss/kinde-auth-nextjs/dist/types";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
 
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Navbar } from "@/components/dashboard/header";
@@ -15,7 +15,7 @@ const DashboardLayout = (
   {children}: { children: React.ReactNode },
 ) => {
   const convex: ConvexReactClient = useConvex();
-  const { user }: KindeState = useKindeBrowserClient();
+  const { user }: KindeUser | any = useKindeBrowserClient();
 
   const createUser = useMutation(api.user.createUser)
 
@@ -45,7 +45,7 @@ const DashboardLayout = (
           <Sidebar />
         </div>
         <div className="md:pl-72">
-          <Navbar />
+          <Navbar user={user}/>
           {children}
         </div>
     </div>

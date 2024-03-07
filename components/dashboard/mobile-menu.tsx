@@ -28,10 +28,9 @@ export const MobileMenu = () => {
 
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger className="md:hidden">
         <Button
           size="sm"
-          className="md:hidden"
         >
           <Menu className="w-4 h-4"/>
         </Button>

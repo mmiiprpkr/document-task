@@ -8,6 +8,10 @@ import { Button } from "../ui/button";
 import { LucidePencil, MoreHorizontal, Trash2 } from "lucide-react";
 import { UseFileEditModal } from "@/hooks/useFileEdit";
 import { useRouter as UseRouter } from "next/navigation";
+import { ConfirmModal } from "../modals/confirm-modal";
+import { useMutation as UseMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 
 export const columns: ColumnDef<File>[] = [
   {
@@ -16,7 +20,7 @@ export const columns: ColumnDef<File>[] = [
     cell: ({ row }) => {
       const router = UseRouter();
 
-      return <h2 className="font-bold cursor-pointer opacity-70 transition" onClick={() => router.push(`/workspace/${row.original._id}`)}>{row.original.fileName}</h2>
+      return <h2 className="font-bold cursor-pointer opacity-70 transition" onClick={() => router.push(`/dashboard/${row.original.teamId}/${row.original._id}`)}>{row.original.fileName}</h2>
     }
   },
   {
@@ -33,6 +37,13 @@ export const columns: ColumnDef<File>[] = [
       const file: File | any = row.original;
 
       const { onOpen } = UseFileEditModal();
+      const delefile = UseMutation(api.file.deleteFile);
+
+      const handleDelete = () => {
+        delefile({
+          _id: row.original._id as Id<"files">
+        })
+      }
 
       return (
         <DropdownMenu>
@@ -45,12 +56,15 @@ export const columns: ColumnDef<File>[] = [
           <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => onOpen(file)}>
                 <LucidePencil className="h-4 w-4 mr-2" />
-                Edit
+                  Edit
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onOpen(file)}>
-                <Trash2 className="h-4 w-4 mr-2" />
-                Delete
-              </DropdownMenuItem>
+              <ConfirmModal confirmFn={handleDelete} header="Are you absolutely sure?" discription="This action cannot be undone. This permanently delete your account
+        and remove your data from our servers.">
+                <Button className="w-full flex items-center justify-start pl-2" variant="ghost">
+                  <Trash2 className="h-4 w-4 mr-2 items-start" />
+                  Delete
+                </Button>
+              </ConfirmModal>
           </DropdownMenuContent>
         </DropdownMenu>
       )

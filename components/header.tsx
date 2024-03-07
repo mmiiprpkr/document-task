@@ -5,25 +5,24 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 
 import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { KindeState } from "@kinde-oss/kinde-auth-nextjs/dist/types";
-import { LayoutDashboard } from "lucide-react";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
+import { LayoutDashboard, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UserAvatar } from "./avatar";
 
-export const Header = () => {
-  const { user }: KindeState | undefined  = useKindeBrowserClient();
-
-  if (user === undefined) {
-    return null
-  }
+interface HeaderProps {
+  user: KindeUser
+}
+export const Header = ({user}: HeaderProps) => {
 
   return (
     <header className="bg-black fixed w-full left-0 top-0">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
         <Link href="/">
           <Image 
-            src="/logo-1.png"
+            src="/logo.png"
             alt="logo"
+            className="text-primary"
             width={60}
             height={60}
           />
@@ -111,6 +110,7 @@ export const Header = () => {
                   </Button>
                 </>
               )}
+            </div>
               {user && (
                 <Link href="/dashboard" className={cn(
                   buttonVariants({
@@ -122,7 +122,9 @@ export const Header = () => {
                   Dashboard
                 </Link>
               )}
-            </div>
+              {user && (
+                <UserAvatar url={user?.picture as string}/>
+              )}
           </div>
         </div>
       </div>
