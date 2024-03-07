@@ -2,7 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 export const getTeam = query({
-  args: { email: v.string() },
+  args: { email: v.optional(v.string()) },
   handler: async (ctx, args) => {
     const team = await ctx.db.query("teams")
       .filter((q) => 
