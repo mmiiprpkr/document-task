@@ -3,7 +3,7 @@
 import { api } from "@/convex/_generated/api";
 import { File } from "@/types";
 import { useQuery } from "convex/react";
-import { redirect, useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { columns } from "@/components/team/columns"
 import { DataTable } from "@/components/team/data-table";

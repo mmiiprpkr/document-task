@@ -9,7 +9,7 @@ import { Loader2 } from "lucide-react";
 const Home = () => {
   const { user }: KindeUser | any  = useKindeBrowserClient();
   console.log(user);
-  if (user === undefined) {
+  if (user === null) {
     return (
       <div className="h-full flex items-center justify-center">
         <Loader2 className="w-7 h-7 animate-spin"/>

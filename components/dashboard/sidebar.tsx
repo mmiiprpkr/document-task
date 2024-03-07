@@ -12,7 +12,7 @@ export const Sidebar = () => {
 
   const team: Team[] | any = useQuery(api.team.getTeam, { email: user?.email as string });
 
-  if (team === undefined && user === undefined) {
+  if (team === undefined || user === null) {
     return null;
   }
 

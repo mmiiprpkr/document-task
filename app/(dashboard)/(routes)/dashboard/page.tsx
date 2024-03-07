@@ -37,8 +37,6 @@ const Dashboardpage = () => {
     });
   }
 
-  console.log(team);
-
   if (!team.length) {
     return router.push("/teams/create");
   }

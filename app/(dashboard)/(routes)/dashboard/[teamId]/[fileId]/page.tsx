@@ -3,7 +3,7 @@
 import { Editor } from "@/components/editor";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { redirect, useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 
 const FileIdPage = () => {
