@@ -62,6 +62,7 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
     })
     handleClose();
     router.push("/dashboard");
+    router.refresh();
   }
 
   const handleChangeTeam = (team: Team) => {

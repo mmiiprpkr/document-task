@@ -26,8 +26,9 @@ const Dashboardpage = () => {
       </div>
     )
   }
+
   
-  if (!result?.length) {
+  if (!result[0]?._id) {
     createUser({
       name: user?.given_name!,
       email: user?.email!,
@@ -42,7 +43,7 @@ const Dashboardpage = () => {
     return null
   }
   
-  if (!team?.length) {
+  if (!team[0]?._id) {
     return router.push("/teams/create");
   }
 

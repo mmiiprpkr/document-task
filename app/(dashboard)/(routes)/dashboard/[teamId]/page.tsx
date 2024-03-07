@@ -23,7 +23,7 @@ const TeamIdPage = () => {
     return null;
   }
 
-  if (!team.length) {
+  if (!team[0]?._id) {
     return redirect("/dashboard")
   }
 
