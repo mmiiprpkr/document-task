@@ -26,7 +26,6 @@ const Dashboardpage = () => {
       </div>
     )
   }
-
   
   if (!result[0]._id) {
     createUser({

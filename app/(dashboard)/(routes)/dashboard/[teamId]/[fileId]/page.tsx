@@ -3,11 +3,12 @@
 import { Editor } from "@/components/editor";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { redirect, useParams } from "next/navigation";
+import { redirect, useParams, useRouter } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 
 const FileIdPage = () => {
   const params = useParams();
+  const router = useRouter();
 
   const files: File | any= useQuery(api.file.getFileById, { _id: params?.fileId as Id<"files"> });
 
@@ -16,7 +17,7 @@ const FileIdPage = () => {
   }
 
   if (!files) {
-    return redirect("/dashboard");
+    return router.push("/dashboard");
   }
 
   return ( 

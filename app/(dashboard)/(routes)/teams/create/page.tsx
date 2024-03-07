@@ -14,6 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const formSchema = z.object({
   teamName: z.string().min(1, {
@@ -89,11 +90,18 @@ const CreateTeamPage = () => {
                   </FormItem>
                 )}
               />
-              <Button
-                disabled={isSubmitting}
-              >
-                Create
-              </Button>
+              <div className="flex items-center gap-x-3">
+                <Button
+                  disabled={isSubmitting}
+                >
+                  Create
+                </Button>
+                <Link href="/dashboard">
+                  <Button variant="ghost">
+                    Back
+                  </Button>
+                </Link>
+              </div>
             </form>
           </Form>
         </div>
