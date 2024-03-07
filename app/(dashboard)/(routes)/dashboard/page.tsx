@@ -19,7 +19,9 @@ const Dashboardpage = () => {
     email: user?.email as string,
   });
 
-  if (result === undefined) {
+  console.log(result, team)
+
+  if (result === undefined || team === undefined) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader2 className="h-5 w-5"/>
@@ -27,9 +29,7 @@ const Dashboardpage = () => {
     )
   }
 
-  if (team === undefined) {
-    return null
-  }
+  console.log(team);
   
   if (!result[0]._id) {
     createUser({
@@ -41,11 +41,11 @@ const Dashboardpage = () => {
     })
   }
 
-  if (team[0]?._id) { 
+  if (team.length) { 
     return router.push(`/dashboard/${team[0]._id}`)
   };
   
-  if (!team[0]?._id) {
+  if (!team.length) {
     return router.push("/teams/create");
   }
 };
