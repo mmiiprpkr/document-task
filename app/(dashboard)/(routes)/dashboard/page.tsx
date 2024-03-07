@@ -28,7 +28,7 @@ const Dashboardpage = () => {
   }
 
   
-  if (!result[0]?._id) {
+  if (!result[0]._id) {
     createUser({
       name: user?.given_name!,
       email: user?.email!,
@@ -37,17 +37,12 @@ const Dashboardpage = () => {
       console.log(resp);
     })
   }
-
-
-  if (team === undefined) {
-    return null
-  }
   
-  if (!team[0]?._id) {
+  if (!team.length) {
     return router.push("/teams/create");
   }
 
-  return router.push(`/dashboard/${team[0]?._id}`);
+  return router.push(`/dashboard/${team[0]._id}`);
 };
 
 export default Dashboardpage;
