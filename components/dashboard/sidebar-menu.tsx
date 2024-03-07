@@ -61,9 +61,6 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
       _id: params?.teamId as Id<"teams">
     })
     handleClose();
-    window.location.replace("/dashboard");
-    // router.push("/dashboard");
-    // router.refresh();
   }
 
   const handleChangeTeam = (team: Team) => {
