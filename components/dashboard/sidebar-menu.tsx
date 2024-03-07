@@ -56,19 +56,6 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
     }
   );
 
-  const onDelete = () => {
-    deleteTeam({
-      _id: params?.teamId as Id<"teams">
-    })
-      handleClose();
-      return router.push("/dashboard")
-  }
-
-  const handleChangeTeam = (team: Team) => {
-    router.push(`/dashboard/${team._id}`);
-    handleClose();
-  }
-
   const handleOpen = () => {
     setOpen(true);
   }
@@ -76,6 +63,19 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
   const handleClose = () => {
     setOpen(!open);
   }
+  
+  const onDelete = () => {
+    deleteTeam({
+      _id: params?.teamId as Id<"teams">
+    })
+    handleClose();
+  }
+
+  const handleChangeTeam = (team: Team) => {
+    router.push(`/dashboard/${team._id}`);
+    handleClose();
+  }
+
 
   const handeOpenModal = (event: React.MouseEvent) => {
     event.stopPropagation();

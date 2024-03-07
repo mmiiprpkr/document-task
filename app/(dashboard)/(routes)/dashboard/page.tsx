@@ -36,6 +36,8 @@ const Dashboardpage = () => {
       console.log(resp);
     })
   }
+
+  console.log(team);
   
   if (!team[0]?._id) {
     return router.push("/teams/create");
