@@ -19,12 +19,16 @@ const Dashboardpage = () => {
     email: user?.email as string,
   });
 
-  if (result === undefined || team === undefined) {
+  if (result === undefined) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader2 className="h-5 w-5"/>
       </div>
     )
+  }
+
+  if (team === undefined) {
+    return null
   }
   
   if (!result[0]._id) {
