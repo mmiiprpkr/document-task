@@ -11,12 +11,14 @@ const FileIdPage = () => {
   const router = useRouter();
 
   const files: File | any= useQuery(api.file.getFileById, { _id: params?.fileId as Id<"files"> });
+  const team = useQuery(api.team.getTeamById, { _id: params?.teamId as string });
 
-  if (files === undefined) {
+
+  if (files === undefined || team === undefined) {
     return null;
   }
 
-  if (!files) {
+  if (!files || !team[0]?._id) {
     return router.push("/dashboard");
   }
 
