@@ -21,8 +21,8 @@ const Dashboardpage = () => {
 
   if (user === null || result === undefined || team === undefined) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader2 className="h-5 w-5" />
+      <div className="flex items-center justify-center h-screen animate-spin">
+        <Loader2 className="h-7 w-7" />
       </div>
     );
   }
