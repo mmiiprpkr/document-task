@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, LayoutGrid, LogOut, Settings, Trash2, User } from "lucide-react";
+import { ChevronDown, File as FileIcon, LayoutGrid, LogOut, Settings, Trash2, User } from "lucide-react";
 import Image from "next/image";
 
 import {
@@ -15,7 +15,7 @@ import { UserAvatar } from "@/components/avatar";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useState } from "react";
-import { Team } from "@/types";
+import { File, Team } from "@/types";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { SidebarItem } from "./sidebar-item";
@@ -44,11 +44,15 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
   const { onOpen } = UseSettingModal();
 
   const team: Team[] | any = useQuery(api.team.getTeamById, { _id: params?.teamId as string });
+  const files: File[] | any = useQuery(api.file.getFiles, { teamId: params?.teamId as Id<"teams">});
+
   const deleteTeam = useMutation(api.team.deleteTeam);
 
-  if (team === undefined) {
+  if (team === undefined || files === undefined) {
     return null;
   }
+
+  console.log(files)
   
   const onClick = (
     (item: string) => {
@@ -159,13 +163,19 @@ export const SidebarMenu = ({ user, teams }: SidebarMenuProps) => {
         </PopoverContent>
       </Popover>
 
-      <Button
-        variant="outline"
-        className="w-full justify-start gap-2 font-bold mt-8"
-      >
-        <LayoutGrid className="h-5 w-5"/>
-        All File
-      </Button>
+      <div className="flex flex-col space-y-2">
+        <div className="px-2">
+          {files.map((file: File) => (
+              <SidebarItem 
+                key={file._id}
+                active={file._id === params?.fileId}
+                onClick={() => router.push(`/dashboard/${team[0]._id}/${file._id}`)}
+                teamName={file.fileName}
+                icon={FileIcon}
+            />
+          ))}
+        </div>
+      </div>
     </>
   );
 };
